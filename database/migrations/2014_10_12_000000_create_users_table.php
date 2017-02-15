@@ -17,13 +17,16 @@ class CreateUsersTable extends Migration
             $table->increments('id');
 
             $table->integer('profile_id')->unsigned();
-            $table->foreign('profile_id')->references('id')->on('profiles');
+            $table->foreign('profile_id')->references('id')->on('profiles')->onUpdate('cascade');
 
             $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('company_id')->references('id')->on('companies')->onUpdate('cascade');
+
+            $table->integer('user_status_id')->unsigned();
+            $table->foreign('user_status_id')->references('id')->on('user_status')->onUpdate('cascade');
 
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
@@ -31,6 +34,8 @@ class CreateUsersTable extends Migration
             $table->boolean('warn');
             $table->string('cel');
             $table->string('phone');
+            $table->boolean('gender')->default(1);
+            $table->string('image')->nullable();
             $table->text('obs');
             $table->timestamps();
         });

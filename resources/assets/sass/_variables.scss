@@ -1,3 +1,36 @@
+// Importa variaveis do thema
+@import 'node_modules/skymaids-theme/scss/vars';
+
+// Primary color
+$color-primary: 'indigo';
+
+$color-primary-list: map-get($color-lists, $color-primary);
+
+$color-primary-50: map-get($color-primary-list, "50");
+$color-primary-100: map-get($color-primary-list, "100");
+$color-primary-200: map-get($color-primary-list, "200");
+$color-primary-300: map-get($color-primary-list, "300");
+$color-primary-400: map-get($color-primary-list, "400");
+$color-primary-500: map-get($color-primary-list, "500");
+$color-primary-600: map-get($color-primary-list, "600");
+$color-primary-700: map-get($color-primary-list, "700");
+$color-primary-800: map-get($color-primary-list, "800");
+$color-primary-900: map-get($color-primary-list, "900");
+
+// Paleta de cores
+$white: #fff;
+$gray: #e0e0e0;
+$gray-base: #212121;
+$text-color: #636b6f;
+$link-color: #9fa8da;
+$font-error: #bf5329;
+
+// Brand color
+$brand-primary:         $color-primary-500;
+$brand-primary-hover:   $color-primary-400;
+$brand-primary-active:  $color-primary-600;
+$brand-primary-400:     $color-primary-400;
+$brand-primary-100:     $color-primary-100;
 
 // Body
 $body-bg: #f5f8fa;
@@ -10,21 +43,18 @@ $panel-default-border: $laravel-border-color;
 $panel-inner-border: $laravel-border-color;
 
 // Brands
-$brand-primary: #3097D1;
 $brand-info: #8eb4cb;
 $brand-success: #2ab27b;
 $brand-warning: #cbb956;
-$brand-danger: #bf5329;
+$brand-danger:  #bf5329;
 
 // Typography
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $font-family-sans-serif: "Raleway", sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
-$text-color: #636b6f;
 
 // Navbar
-$navbar-default-bg: #fff;
+$navbar-default-bg: $white;
 
 // Buttons
 $btn-default-color: $text-color;
@@ -35,4 +65,16 @@ $input-border-focus: lighten($brand-primary, 25%);
 $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
-$panel-default-heading-bg: #fff;
+$panel-default-heading-bg: $white;
+
+// Login
+$login-main-font-color: #757575;
+$login-main-background-color: $white;
+$login-brand-font-color: #3f51b5;
+$login-social-icon-active-color: $white;
+
+// APP
+$form-app-border: 1px solid #e0e0e0 !important;
+
+//Loader
+$animsition-loading-spinner-bg: $brand-primary !default;

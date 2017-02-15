@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace SkyMaids\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
@@ -16,6 +16,11 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
-        require base_path('routes/channels.php');
+        /*
+         * Authenticate the user's personal channel...
+         */
+        Broadcast::channel('App.User.*', function ($user, $userId) {
+            return (int) $user->id === (int) $userId;
+        });
     }
 }

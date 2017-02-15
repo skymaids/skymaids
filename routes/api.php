@@ -13,6 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::get('/user', function (Request $request) {
+//    return $request->user();
+//})->middleware('auth:api');
+
+
+
+
+//Route::resource('/stock/category','Modules\Stock\Http\Controllers\StockCategoryController')->middleware('auth:api');
+
+//Route::post('/stock/categories/getData', function (Request $request) {
+//    return Datatables::eloquent(Modules\User\Entities\User::query())->make(true);
+//});
+
+
+
+//Route::post('/stock/categories/filter', function (Request $request) {
+//    return $request->user();
+//})->middleware('auth:api');

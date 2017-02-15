@@ -1,9 +1,92 @@
-
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
-// Variables
 @import "variables";
+@import "vendor";
+@import "pages/login";
+@import "pages/lockscreen";
+@import "pages/dashboard";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+.site-menubar-fold {
+  .site-navbar {
+    .navbar-header {
+      width: 260px !important;
+
+      .navbar-brand > img.navbar-brand-logo {
+        display: block !important;
+      }
+    }
+    .navbar-container {
+      margin-left: 260px !important;
+    }
+  }
+}
+
+.panel-body > .row:last-child > [class*="col-"]:last-child .form-wrap:last-child {
+  margin-bottom:0;
+}
+
+.page-header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.form-title {
+  text-transform:uppercase;
+  font-size:14px;
+}
+
+.form-wrap {
+  margin-bottom:80px;
+}
+
+.form {
+  margin-bottom:20px;
+  margin-top:20px;
+}
+.panel-body {
+  padding-top: 25px;
+  padding-bottom: 0px;
+}
+
+.border-form-app {
+  color: #757575 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 3px !important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+  background-position: center bottom, center calc(100%) !important;
+}
+.border-form-gradient-image {
+  background-image: linear-gradient(#3f51b5, #3f51b5), linear-gradient(#fff, #fff) !important;
+}
+
+.form-app {
+  .form-group {
+    margin-bottom: 0.8rem;
+  }
+  .form-material {
+    .form-control {
+      height: 36px !important;
+      padding: 6px 15px !important;
+      @extend .border-form-app;
+
+      .form-app .form-material .form-control.focus, .form-app .form-material .form-control:focus {
+        @extend .border-form-gradient-image;
+      }
+    }
+  }
+}
+
+div.dataTables_processing {
+  background: none !important;
+}
+
+.dataTables_wrapper {
+  padding-bottom: 15px;
+}
+
+.page-login-v2 .page-brand-info {
+  margin: 220px 100px 0 90px;
+  margin-top: 50px;
+  margin-right: 100px;
+  margin-bottom: 0px;
+  margin-left: 90px;
+}
