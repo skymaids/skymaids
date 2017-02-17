@@ -24,7 +24,10 @@ class UserStatusTableSeeder extends Seeder
             [
                 'id'   => 1,
                 'name' => 'Active'
-            ],
+            ]
+        );
+
+        factory(Status::class)->create(
             [
                 'id'   => 2,
                 'name' => 'Inactive'

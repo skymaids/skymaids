@@ -44840,7 +44840,7 @@ fieldset[disabled] .twitter-typeahead .tt-input {
   margin-left: 260px !important;
 }
 
-.panel-body > .row:last-child > [class*="col-"]:last-child .form-wrap:last-child {
+site-menubar-body .panel-body > .row:last-child > [class*="col-"]:last-child .form-wrap:last-child {
   margin-bottom: 0;
 }
 

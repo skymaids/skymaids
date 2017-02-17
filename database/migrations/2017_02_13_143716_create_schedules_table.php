@@ -19,8 +19,8 @@ class CreateSchedulesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
 
-            $table->integer('address_id')->unsigned();
-            $table->foreign('address_id')->references('id')->on('addresses')->onUpdate('cascade');
+            $table->integer('user_address_id')->unsigned();
+            $table->foreign('user_address_id')->references('id')->on('user_addresses')->onUpdate('cascade');
 
             $table->integer('team_id')->unsigned();
             $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade');
@@ -28,8 +28,9 @@ class CreateSchedulesTable extends Migration
             $table->date('day');
             $table->time('start');
             $table->time('end');
-            $table->text('obs');
-            $table->boolean('message');
+            $table->text('obs')->nullable();
+            $table->dateTime('message')->nullable();
+            $table->dateTime('confirm')->nullable();
             $table->timestamps();
         });
     }

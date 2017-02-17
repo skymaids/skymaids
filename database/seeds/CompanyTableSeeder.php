@@ -23,7 +23,10 @@ class CompanyTableSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Sky Maids'
-            ],
+            ]
+        );
+
+        factory(Company::class)->create(
             [
                 'id' => 2,
                 'name' => 'Sky Lawns'

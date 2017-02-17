@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserStatusTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(MenuTableSeeder::class);
+        $this->call(TeamTableSeeder::class);
 
         // supposed to only apply to a single connection and reset it's self
         // but I like to explicitly undo what I've done for clarity

@@ -23,15 +23,24 @@ class ProfileTableSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Administrator'
-            ],
+            ]
+        );
+
+        factory(Profile::class)->create(
             [
                 'id' => 2,
                 'name' => 'Client'
-            ],
+            ]
+        );
+
+        factory(Profile::class)->create(
             [
                 'id' => 3,
                 'name' => 'Employee'
-            ],
+            ]
+        );
+
+        factory(Profile::class)->create(
             [
                 'id' => 4,
                 'name' => 'Team Member'

@@ -19,6 +19,7 @@ Vue.component('passport-personal-access-tokens', require('./components/passport/
 /**
  * Instancia os módulos
  */
+Vue.component('page-schedule', require('./modules/Schedule/Page.vue'));
 Vue.component('page-stock-categories', require('./modules/Stock/Categories/Page.vue'));
 Vue.component('page-stock-products', require('./modules/Stock/Products/Page.vue'));
 Vue.component('page-stock-softwares', require('./modules/Stock/Softwares/Page.vue'));

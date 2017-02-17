@@ -19,9 +19,10 @@ class CreateTeamsTable extends Migration
             $table->integer('company_id')->unsigned();
             $table->foreign('company_id')->references('id')->on('companies')->onUpdate('cascade');
 
-            $table->string('name')->unique();
-            $table->string('calendar')->unique();
+            $table->string('name');
+            $table->string('calendar');
             $table->string('color');
+            $table->unique(['company_id','name']);
             $table->timestamps();
         });
     }

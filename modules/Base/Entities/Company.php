@@ -3,6 +3,7 @@
 namespace Modules\Base\Entities;
 
 use Modules\Base\Entities\BaseModel;
+use Modules\User\Entities\Team;
 use Modules\User\Entities\User;
 
 /**
@@ -30,8 +31,17 @@ class Company extends BaseModel
      * Relation with users
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function users()
+    private function users()
     {
         return $this->hasMany(User::class, 'id', 'company_id');
+    }
+
+    /**
+     * Relation with teams
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    private function teams()
+    {
+        return $this->hasMany(Team::class, 'id', 'company_id');
     }
 }

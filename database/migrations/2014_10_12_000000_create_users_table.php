@@ -33,10 +33,10 @@ class CreateUsersTable extends Migration
             $table->boolean('status');
             $table->boolean('warn');
             $table->string('cel');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->boolean('gender')->default(1);
             $table->string('image')->nullable();
-            $table->text('obs');
+            $table->text('obs')->nullable();
             $table->timestamps();
         });
     }
