@@ -1,0 +1,19 @@
+/** _lockscreen.scss */
+.page-locked {
+  &:before {
+    background-image: url("/images/lockscreen.jpg");
+  }
+  .avatar {
+    margin-bottom: 15px;
+  }
+  .locked-user {
+    margin-bottom: 35px;
+  }
+  a {
+    color: $link-color;
+  }
+  form {
+    width: 300px;
+    margin: 22px auto;
+  }
+}
