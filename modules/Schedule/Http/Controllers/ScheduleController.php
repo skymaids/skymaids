@@ -4,7 +4,7 @@ namespace Modules\Schedule\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Base\Repositories\ScheduleRepository;
+use Modules\Schedule\Repositories\ScheduleRepository;
 
 /**
  * Class ScheduleController

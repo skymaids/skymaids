@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Base\Repositories;
+namespace Modules\Schedule\Repositories;
 
 use Modules\Base\Repositories\BaseRepository;
 use Modules\Schedule\Entities\Schedule;
 
 /**
  * Class ScheduleRepository
- * @package Modules\Base\Repositories
+ * @package Modules\Schedule\Repositories
  * @author Ruver Dornelas <ruver@imatec.com.br>
  * @Date 02/16/2017
  * @version 1.0

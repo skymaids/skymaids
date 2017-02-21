@@ -1,12 +1,12 @@
 <?php
-namespace Modules\User\Entities;
+namespace Modules\Schedule\Entities;
 
 use Modules\Base\Entities\BaseModel;
 use Modules\Team\Entities\Team;
 
 /**
  * Class Schedule
- * @package Modules\User\Entities
+ * @package Modules\Schedule\Entities
  * @author Ruver Dornelas <ruver@imatec.com.br>
  * @Date 02/16/2017
  * @version 1.0

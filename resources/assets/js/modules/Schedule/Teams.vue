@@ -4,7 +4,7 @@
             <div class="panel" v-for="team in teamsState">
                 <div class="panel-heading" id="panel-team">
                     <h3 class="panel-title">
-                        <i class="icon md-truck" aria-hidden="true"></i>
+                        <i class="icon md-car" aria-hidden="true"></i>
                         {{ team.name }}
                         <span class="tag tag-round" :class="team.color">#REF</span>
                     </h3>
@@ -49,7 +49,7 @@
                                         {{ schedule.client }}<span class="tag tag-primary tag-sm">{{ schedule.hour }}</span>
                                     </h5>
                                     <div class="panel-actions panel-actions-keep">
-                                        <input type="checkbox" data-plugin="switchery" data-size="small" checked="" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" data-plugin="switchery" data-size="small" checked="" data-switchery="true" data-color="#3f51b5" style="display: none;">
                                     </div>
                                 </div>
                                 <div class="panel-body">
