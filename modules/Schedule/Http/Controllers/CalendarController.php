@@ -3,8 +3,8 @@
 namespace Modules\Schedule\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use DateTime;
+use Illuminate\Routing\Controller;
 
 class CalendarController extends Controller
 {
@@ -19,6 +19,11 @@ class CalendarController extends Controller
 
     /* Which keyword has been added to cal at last? */
     private $_lastKeyWord;
+
+    private $tokenPhone = 'b6c87624bcfbc4ca38b7ba9159a3464f';
+    private $tokenGender = 'skgmfyARScVJHxrcNe';
+    private $tokenMaps = 'AIzaSyBK2UvEeVFy6iDtDLyEXTsUr2R6dVoTEr8';
+
 
     /**
      * Creates the iCal-Object
@@ -283,7 +288,7 @@ class CalendarController extends Controller
      */
     public function getName($dirtyString)
     {
-        $arrayString = explode(" ", $dirtyString);
+        $arrayString = explode(" ", str_replace(['*'],'',$dirtyString));
         $string = false;
 
         foreach ($arrayString as $piece){
@@ -295,8 +300,131 @@ class CalendarController extends Controller
         return $string;
     }
 
+    /**
+     * Return Login
+     *
+     * @param $name
+     * @return bool|string
+     */
+    public function getLogin($name)
+    {
+        $arrayName = explode(" ", $name);
+        $count = count($arrayName) - 1;
+        return ($count >= 1) ? strtolower($arrayName[0].".".$arrayName[$count]) : strtolower(str_replace(" ",".",$name));
+    }
+
+    /**
+     * Get Address
+     *
+     * @param $dirtyString
+     * @return mixed
+     */
     public function getAddress($dirtyString)
     {
-        return str_replace("\\","",$dirtyString);
+        $arrayAddress = [];
+        $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='. urlencode(str_replace("\\","",$dirtyString)) . '&sensor=false'));
+
+        foreach ($data->results[0]->address_components as $obj){
+            switch ($obj->types[0]){
+                case 'street_number':
+                    $arrayAddress['number'] = $obj->short_name;
+                break;
+                case 'route':
+                    $arrayAddress['street'] = $obj->short_name;
+                break;
+                case 'locality':
+                    $arrayAddress['city'] = $obj->short_name;
+                break;
+                case 'administrative_area_level_1':
+                    $arrayAddress['state'] = $obj->short_name;
+                break;
+                case 'postal_code':
+                    $arrayAddress['zip'] = $obj->short_name;
+                break;
+            }
+        }
+        $arrayAddress['address'] = $arrayAddress['number']." ".$arrayAddress['street'];
+        return $arrayAddress;
+    }
+
+    /**
+     * Return phones and types
+     *
+     * @param string $dirtyString
+     * @return array
+     */
+    public function getPhones($dirtyString = '')
+    {
+        $matches = [];
+        $phones = ['landline' => '','mobile' => ''];
+        preg_match_all('/[0-9]{10}|[0-9]{3}[\-][0-9]{6}|[0-9]{3}[\s][0-9]{6}|[0-9]{3}[\s][0-9]{3}[\s][0-9]{4}|[0-9]{3}[\-][0-9]{3}[\-][0-9]{4}|[\(][0-9]{3}[\)][\s][0-9]{3}[\s][0-9]{4}/', $dirtyString, $matches);
+
+        foreach ($matches[0] as $value) {
+            switch ($this->typePhone('1'.str_replace(['-',' ','(',')'],"",$value))){
+                case 'landline':
+                    $phones['landline'] = str_replace(['-',' ','(',')'],"",$value);
+                break;
+                case 'mobile':
+                    $phones['mobile'] = str_replace(['-',' ','(',')'],"",$value);
+                break;
+            }
+        }
+        return $phones;
+    }
+
+    /**
+     * Get type phone or return false
+     *
+     * @param $number
+     * @return bool
+     */
+    public function typePhone($number)
+    {
+        // Initialize CURL:
+        $ch = curl_init('http://apilayer.net/api/validate?access_key='.$this->tokenPhone.'&number='.$number.'');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Store the data:
+        $json = curl_exec($ch);
+        curl_close($ch);
+
+        // Decode JSON response:
+        $validationResult = json_decode($json, true);
+
+        if($validationResult['valid']){
+            return $validationResult['line_type'];
+        }
+        return false;
+    }
+
+    /**
+     * Return email
+     *
+     * @param string $dirtyString
+     * @return array
+     */
+    public function getEmail($dirtyString = '')
+    {
+        $matches = [];
+        $pattern="/(?:[a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/";
+
+        preg_match_all($pattern, $dirtyString, $matches);
+
+        foreach($matches[0] as $email){
+            return $email;
+        }
+        return '';
+    }
+
+    /**
+     * Get gender by name
+     *
+     * @param $name
+     * @return bool
+     */
+    function getGender($name) {
+        $arrayName = explode(" ", $name);
+        $data = json_decode(file_get_contents('https://gender-api.com/get?key=' . $this->tokenGender . '&name=' . urlencode($arrayName[0])));
+        return $data->gender;
     }
 }

@@ -32,6 +32,7 @@ export class Loader{
 let StockCategory = Vue.resource('/api/stock/categories{/id}');
 let StockProduct = Vue.resource('/api/stock/products{/id}');
 let StockSoftware = Vue.resource('/api/stock/softwares{/id}');
+let Schedule = Vue.resource('/api/schedule/schedules{/id}');
 let Unit = Vue.resource('/api/base/units{/id}');
 let MenuPage = Vue.resource('/api/menu/page{/id}');
 

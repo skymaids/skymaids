@@ -17,6 +17,7 @@ window.$ = window.jQuery = require('jquery');
  */
 
 window.Vue = require('vue');
+window.Moment = require('moment');
 require('vue-resource');
 
 /**

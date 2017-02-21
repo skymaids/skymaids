@@ -9,59 +9,296 @@ export const store = new Vuex.Store({
         header: {
             title: 'Schedule'
         },
-        search: {}, //Pega informações do banco
-        crud: {
-            id: null, //ID que define se tela vai ser montada como edição ou cadastro
-            modal: {
-                id: 'module-crud',
-                close: true,
-                title: null,
-                currentTab: 'crud',
-                tabs: [
+        date: window.Moment().format("MM/DD/YYYY"),
+        teams: [
+            {
+                id: 1,
+                name: 'Carro #01',
+                color: 'tag-danger',
+                members: [
                     {
-                        title: 'Cadastrar',
-                        component: 'tab-crud',
-                        ref: 'crud',
-                        activeClass: 'active'
+                        id: 6,
+                        name: 'Ema'
+                    },
+                    {
+                        id: 19,
+                        name: 'Mirian'
+                    }
+                ],
+                schedules: [
+                    {
+                        client: 'Celeste Fuertes',
+                        hour: '08:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Chaves de baixo do tapete'
+                    },
+                    {
+                        client: 'Toleda Baldino',
+                        hour: '10:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Limpar geladeira'
+                    },
+                    {
+                        client: 'Tamara Bowman',
+                        hour: '13:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Nunca entrar nos quartos e limpar banheira'
+                    },
+                    {
+                        client: 'Flower Hill School',
+                        hour: '15:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Pegar chave com guarda'
                     }
                 ]
             },
-        },
-        filter: {
-            id: null,
-            module: null,
-            url: null,
-            form: 'form-module-search',
-            pageLength: 25,
-            excel: true,
-            columns: [
-                {
-                    name: 'Ações',
-                    className: 'actions',
-                    sortable: false,
-                    searchable: false,
-                    action: true,
-                    width: "5%"
-                },
-                {
-                    name: 'Nome',
-                    data: 'name'
-                }
-            ],
-            footer: {
-                columns: false
+            {
+                id: 2,
+                name: 'Carro #02',
+                color: 'tag-primary',
+                members: [
+                    {
+                        id: 6,
+                        name: 'Ema'
+                    },
+                    {
+                        id: 19,
+                        name: 'Mirian'
+                    }
+                ],
+                schedules: [
+                    {
+                        client: 'Celeste Fuertes',
+                        hour: '08:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Chaves de baixo do tapete'
+                    },
+                    {
+                        client: 'Toleda Baldino',
+                        hour: '10:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Limpar geladeira'
+                    },
+                    {
+                        client: 'Tamara Bowman',
+                        hour: '13:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Nunca entrar nos quartos e limpar banheira'
+                    },
+                    {
+                        client: 'Flower Hill School',
+                        hour: '15:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Pegar chave com guarda'
+                    }
+                ]
             },
-            order: {
-                target: 1,
-                direction: 'asc'
+            {
+                id: 3,
+                name: 'Carro #03',
+                color: 'tag-default',
+                members: [
+                    {
+                        id: 6,
+                        name: 'Ema'
+                    },
+                    {
+                        id: 19,
+                        name: 'Mirian'
+                    }
+                ],
+                schedules: [
+                    {
+                        client: 'Celeste Fuertes',
+                        hour: '08:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Chaves de baixo do tapete'
+                    },
+                    {
+                        client: 'Toleda Baldino',
+                        hour: '10:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Limpar geladeira'
+                    },
+                    {
+                        client: 'Tamara Bowman',
+                        hour: '13:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Nunca entrar nos quartos e limpar banheira'
+                    },
+                    {
+                        client: 'Flower Hill School',
+                        hour: '15:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Pegar chave com guarda'
+                    }
+                ]
             },
-            actions: [
-                {
-                    name: 'edit',
-                    icon: 'icon md-edit'
-                }
-            ]
-        }
+            {
+                id: 4,
+                name: 'Carro #04',
+                color: 'tag-info',
+                members: [
+                    {
+                        id: 6,
+                        name: 'Ema'
+                    },
+                    {
+                        id: 19,
+                        name: 'Mirian'
+                    }
+                ],
+                schedules: [
+                    {
+                        client: 'Celeste Fuertes',
+                        hour: '08:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Chaves de baixo do tapete'
+                    },
+                    {
+                        client: 'Toleda Baldino',
+                        hour: '10:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Limpar geladeira'
+                    },
+                    {
+                        client: 'Tamara Bowman',
+                        hour: '13:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Nunca entrar nos quartos e limpar banheira'
+                    },
+                    {
+                        client: 'Flower Hill School',
+                        hour: '15:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Pegar chave com guarda'
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: 'Carro #05',
+                color: 'tag-warning',
+                members: [
+                    {
+                        id: 6,
+                        name: 'Ema'
+                    },
+                    {
+                        id: 19,
+                        name: 'Mirian'
+                    }
+                ],
+                schedules: [
+                    {
+                        client: 'Celeste Fuertes',
+                        hour: '08:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Chaves de baixo do tapete'
+                    },
+                    {
+                        client: 'Toleda Baldino',
+                        hour: '10:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Limpar geladeira'
+                    },
+                    {
+                        client: 'Tamara Bowman',
+                        hour: '13:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Nunca entrar nos quartos e limpar banheira'
+                    },
+                    {
+                        client: 'Flower Hill School',
+                        hour: '15:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Pegar chave com guarda'
+                    }
+                ]
+            },
+            {
+                id: 6,
+                name: 'Carro #06',
+                color: 'tag-dark',
+                members: [
+                    {
+                        id: 6,
+                        name: 'Ema'
+                    },
+                    {
+                        id: 19,
+                        name: 'Mirian'
+                    }
+                ],
+                schedules: [
+                    {
+                        client: 'Celeste Fuertes',
+                        hour: '08:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Chaves de baixo do tapete'
+                    },
+                    {
+                        client: 'Toleda Baldino',
+                        hour: '10:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Limpar geladeira'
+                    },
+                    {
+                        client: 'Tamara Bowman',
+                        hour: '13:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Nunca entrar nos quartos e limpar banheira'
+                    },
+                    {
+                        client: 'Flower Hill School',
+                        hour: '15:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Pegar chave com guarda'
+                    }
+                ]
+            },
+            {
+                id: 7,
+                name: 'Carro #07',
+                color: 'tag-success',
+                members: [
+                    {
+                        id: 6,
+                        name: 'Ema'
+                    },
+                    {
+                        id: 19,
+                        name: 'Mirian'
+                    }
+                ],
+                schedules: [
+                    {
+                        client: 'Celeste Fuertes',
+                        hour: '08:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Chaves de baixo do tapete'
+                    },
+                    {
+                        client: 'Toleda Baldino',
+                        hour: '10:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Limpar geladeira'
+                    },
+                    {
+                        client: 'Tamara Bowman',
+                        hour: '13:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Nunca entrar nos quartos e limpar banheira'
+                    },
+                    {
+                        client: 'Flower Hill School',
+                        hour: '15:00',
+                        address: '5108 Donovan Dr, Alexandria, VA 22304',
+                        comment: 'Pegar chave com guarda'
+                    }
+                ]
+            }
+        ]
     },
     mutations,
     getters,

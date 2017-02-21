@@ -3,9 +3,9 @@
 namespace Modules\Schedule\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Routing\Controller;
 
 class TesteController extends Controller
 {
@@ -19,17 +19,25 @@ class TesteController extends Controller
         foreach ($events as $event){
             if(strtolower($event['SUMMARY']) !== 'vacant') {
                 $user = $calendar->getName($event['SUMMARY']);
-                $address = $calendar->getAddress($event['LOCATION']);
-                $phone = $event['DESCRIPTION'];
+                $gender = $calendar->getGender($user);
+                $login = $calendar->getLogin($user);
+                $addressInfo = $calendar->getAddress($event['LOCATION']);
+                $phones = $calendar->getPhones($event['DESCRIPTION']);
+                $email = $calendar->getEmail($event['DESCRIPTION']);
                 $date = new DateTime("@{$event['UNIX_TIMESTAMP']}");
 
                 echo "<pre>";
                 var_dump($event);
                 echo "</pre>";
                 echo "<pre>";
+
                 var_dump($date->format('Y-m-d H:i:s e'));
                 var_dump($user);
-                var_dump($address);
+                var_dump($login);
+                var_dump($gender);
+                var_dump($phones);
+                var_dump($email);
+                var_dump($addressInfo);
                 echo "</pre>";
             }
         }

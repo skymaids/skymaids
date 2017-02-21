@@ -4,9 +4,28 @@ namespace Modules\Schedule\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Base\Repositories\ScheduleRepository;
 
+/**
+ * Class ScheduleController
+ * @package Modules\Stock\Http\Controllers
+ * @author Ruver Dornelas <ruver@imatec.com.br>
+ * @Date 21/02/2017
+ * @version 1.0
+ */
 class ScheduleController extends Controller
 {
+    protected $repository;
+
+    /**
+     * ScheduleController constructor.
+     * @param ScheduleRepository $repository
+     */
+    public function __construct(ScheduleRepository $repository)
+    {
+        $this->repository  = $repository;
+    }
+
 	/**
      * Display a listing of the resource.
      * @return Response
@@ -58,5 +77,20 @@ class ScheduleController extends Controller
      */
     public function destroy()
     {
+    }
+
+    public function send()
+    {
+
+    }
+
+    public function sync()
+    {
+
+    }
+
+    public function report()
+    {
+
     }
 }
