@@ -59,4 +59,9 @@ class TeamController extends Controller
     public function destroy()
     {
     }
+
+    public function sync(Request $request)
+    {
+        dd($request);
+    }
 }
