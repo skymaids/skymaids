@@ -36,7 +36,9 @@ class Authenticate
             'auth.password.reset',
             'auth.password.email',
             'auth.logout',
-            'auth.lock'
+            'auth.lock',
+            'schedule.confirm',
+            'schedule.thanks'
         ];
 
         if (in_array(\Request::route()->getName(), $collectionAllow)) {

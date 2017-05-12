@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Base\Repositories;
+namespace Modules\User\Repositories;
 
 use Modules\Base\Repositories\BaseRepository;
-use Modules\Base\Entities\Address;
+use Modules\User\Entities\Address;
 
 /**
  * Class AddressRepository
- * @package Modules\Base\Repositories
- * @author Ruver Dornelas <ruver@imatec.com.br>
- * @Date 02/16/2017
+ * @package Modules\User\Repositories
+ * @author Ruver Dornelas <ruverd@gmail.com>
+ * @Date 02/15/2017
  * @version 1.0
  */
 class AddressRepository extends BaseRepository

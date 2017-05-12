@@ -2,7 +2,6 @@
 namespace Modules\Team\Entities;
 
 use Modules\Base\Entities\BaseModel;
-use Modules\User\Entities\Schedule;
 use Modules\User\Entities\User;
 
 /**
@@ -19,8 +18,9 @@ class Composition extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'schedule_id',
-        'user_id'
+        'team_id',
+        'user_id',
+        'day'
     ];
 
     /**
@@ -31,18 +31,18 @@ class Composition extends BaseModel
 
     /**
      * Relation with schedule
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function schedules()
+    protected function team()
     {
-        return $this->hasMany(Schedule::class, 'schedule_id', 'id');
+        return $this->belongsTo(Team::class);
     }
 
     /**
      * Relation with user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function user()
+    protected function user()
     {
         return $this->belongsTo(User::class);
     }

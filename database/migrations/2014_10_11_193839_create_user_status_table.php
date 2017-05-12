@@ -30,5 +30,3 @@ class CreateUserStatusTable extends Migration
         Schema::dropIfExists('user_status');
     }
 }
-
-

@@ -31,7 +31,7 @@ class Company extends BaseModel
      * Relation with users
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    private function users()
+    protected function users()
     {
         return $this->hasMany(User::class, 'id', 'company_id');
     }
@@ -40,7 +40,7 @@ class Company extends BaseModel
      * Relation with teams
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    private function teams()
+    protected function teams()
     {
         return $this->hasMany(Team::class, 'id', 'company_id');
     }

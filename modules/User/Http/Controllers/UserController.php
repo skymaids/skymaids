@@ -34,4 +34,20 @@ class UserController extends BaseController
         $users = $this->repository->all();
         return view('user::index')->with(compact('users'));
     }
+
+
+    /**
+     * Return all user of the profile member team
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function members()
+    {
+        $users = $this->repository->findWhere(
+            [
+                'user_status_id' => 1,
+                'profile_id'=> 4
+            ]
+        );
+        return response()->json($users, 200);
+    }
 }

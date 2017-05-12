@@ -10,7 +10,7 @@ export class Loader{
             loadingParentElement: 'html',
             loadingInner: `
                     <div class="loader-content">
-                    <h2>Imatec</h2>
+                    <h2>Sky Maids</h2>
                     <div class="loader-index">
                       <div></div>
                       <div></div>
@@ -29,11 +29,7 @@ export class Loader{
     }
 }
 
-let StockCategory = Vue.resource('/api/stock/categories{/id}');
-let StockProduct = Vue.resource('/api/stock/products{/id}');
-let StockSoftware = Vue.resource('/api/stock/softwares{/id}');
 let Schedule = Vue.resource('/api/schedule/schedules{/id}');
-let Unit = Vue.resource('/api/base/units{/id}');
 let MenuPage = Vue.resource('/api/menu/page{/id}');
 
-export {StockCategory,StockProduct,StockSoftware,Unit,MenuPage};
+export {Schedule,MenuPage};

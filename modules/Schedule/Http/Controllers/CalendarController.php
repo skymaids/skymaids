@@ -4,9 +4,10 @@ namespace Modules\Schedule\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DateTime;
-use Illuminate\Routing\Controller;
+use Modules\Base\Http\Controllers\BaseController;
+use Carbon\Carbon;
 
-class CalendarController extends Controller
+class CalendarController extends BaseController
 {
     /* How many ToDos are in this ical? */
     public $todo_count = 0;
@@ -158,6 +159,7 @@ class CalendarController extends Controller
      */
     public function iCalDateToUnixTimestamp($icalDate)
     {
+        $checkTZ = strpos($icalDate, 'Z');
         $icalDate = str_replace('T', '', $icalDate);
         $icalDate = str_replace('Z', '', $icalDate);
         $pattern  = '/([0-9]{4})';   // 1: YYYY
@@ -173,7 +175,8 @@ class CalendarController extends Controller
         }
         // Unix timestamps after 03:14:07 UTC 2038-01-19 might cause an overflow
         // if 32 bit integers are used.
-        $timestamp = mktime((int)$date[4],
+        $timestamp = mktime(
+            (int)$date[4] - (($checkTZ === false) ? 0 : 4),
             (int)$date[5],
             (int)$date[6],
             (int)$date[2],
@@ -288,7 +291,7 @@ class CalendarController extends Controller
      */
     public function getName($dirtyString)
     {
-        $arrayString = explode(" ", str_replace(['*'],'',$dirtyString));
+        $arrayString = explode(" ", str_replace(['*',' key ', ' KEY '],'',$dirtyString));
         $string = false;
 
         foreach ($arrayString as $piece){
@@ -321,29 +324,39 @@ class CalendarController extends Controller
      */
     public function getAddress($dirtyString)
     {
-        $arrayAddress = [];
+        $arrayAddress = [
+            'number' => '',
+            'street' => '',
+            'city' => '',
+            'state' => '',
+            'zip' => ''
+        ];
         $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='. urlencode(str_replace("\\","",$dirtyString)) . '&sensor=false'));
 
-        foreach ($data->results[0]->address_components as $obj){
-            switch ($obj->types[0]){
-                case 'street_number':
-                    $arrayAddress['number'] = $obj->short_name;
-                break;
-                case 'route':
-                    $arrayAddress['street'] = $obj->short_name;
-                break;
-                case 'locality':
-                    $arrayAddress['city'] = $obj->short_name;
-                break;
-                case 'administrative_area_level_1':
-                    $arrayAddress['state'] = $obj->short_name;
-                break;
-                case 'postal_code':
-                    $arrayAddress['zip'] = $obj->short_name;
-                break;
+        if(count($data->results)){
+            foreach ($data->results[0]->address_components as $obj){
+                switch ($obj->types[0]){
+                    case 'street_number':
+                        $arrayAddress['number'] = $obj->short_name;
+                        break;
+                    case 'route':
+                        $arrayAddress['street'] = $obj->short_name;
+                        break;
+                    case 'locality':
+                        $arrayAddress['city'] = $obj->short_name;
+                        break;
+                    case 'administrative_area_level_1':
+                        $arrayAddress['state'] = $obj->short_name;
+                        break;
+                    case 'postal_code':
+                        $arrayAddress['zip'] = $obj->short_name;
+                        break;
+                }
             }
+            $arrayAddress['address'] = $arrayAddress['number']." ".$arrayAddress['street'];
+        } else{
+            $arrayAddress['address'] = str_replace("\\","",$dirtyString);
         }
-        $arrayAddress['address'] = $arrayAddress['number']." ".$arrayAddress['street'];
         return $arrayAddress;
     }
 
@@ -367,6 +380,9 @@ class CalendarController extends Controller
                 case 'mobile':
                     $phones['mobile'] = str_replace(['-',' ','(',')'],"",$value);
                 break;
+                default:
+                    $phones['landline'] = str_replace(['-',' ','(',')'],"",$value);
+                break;
             }
         }
         return $phones;
@@ -380,21 +396,25 @@ class CalendarController extends Controller
      */
     public function typePhone($number)
     {
-        // Initialize CURL:
-        $ch = curl_init('http://apilayer.net/api/validate?access_key='.$this->tokenPhone.'&number='.$number.'');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        try {
+            // Initialize CURL:
+            $ch = curl_init('http://apilayer.net/api/validate?access_key='.$this->tokenPhone.'&number='.$number.'');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        // Store the data:
-        $json = curl_exec($ch);
-        curl_close($ch);
+            // Store the data:
+            $json = curl_exec($ch);
+            curl_close($ch);
 
-        // Decode JSON response:
-        $validationResult = json_decode($json, true);
+            // Decode JSON response:
+            $validationResult = json_decode($json, true);
 
-        if($validationResult['valid']){
-            return $validationResult['line_type'];
+            if($validationResult['valid']){
+                return $validationResult['line_type'];
+            }
+            return false;
+        } catch (\Exception $e){
+            return false;
         }
-        return false;
     }
 
     /**
@@ -413,7 +433,7 @@ class CalendarController extends Controller
         foreach($matches[0] as $email){
             return $email;
         }
-        return '';
+        return null;
     }
 
     /**
@@ -422,9 +442,70 @@ class CalendarController extends Controller
      * @param $name
      * @return bool
      */
-    function getGender($name) {
+    public function getGender($name)
+    {
         $arrayName = explode(" ", $name);
         $data = json_decode(file_get_contents('https://gender-api.com/get?key=' . $this->tokenGender . '&name=' . urlencode($arrayName[0])));
-        return $data->gender;
+        return ($data->gender) ? (($data->gender == 'male') ? 1 : 0) : 0;
+    }
+
+    /**
+     * Check if have key
+     *
+     * @param string $dirtyString
+     * @return bool
+     */
+    public function getKey($dirtyString)
+    {
+        return (strpos(strtolower($dirtyString), ' key ') !== false) ? 1 : 0;
+    }
+
+    /**
+     * Check if is vacant
+     *
+     * @param $var
+     * @return bool
+     */
+    public function isVacant($var)
+    {
+        return strtolower($var) == 'vacant' ? true :false;
+    }
+
+
+    /**
+     * Format event
+     *
+     * @param $event
+     * @return object
+     */
+    public function event($event)
+    {
+        $flag = true;
+        if(isset($event['EXDATE;TZID=America/New_York'])) {
+            if($event['DTSTART'] == $event['EXDATE;TZID=America/New_York']){
+                $flag = false;
+            }
+        }
+
+        if(!$this->isVacant($event['SUMMARY']) && $flag) {
+            $user = $this->getName($event['SUMMARY']);
+            $arrayInfo = [
+                'vacant' => false,
+                'user' => $user,
+                'login' => $this->getLogin($user),
+                'gender' => $this->getGender($user),
+                'key' => $this->getKey($event['SUMMARY']),
+                'address' => $this->getAddress($event['LOCATION']),
+                'phones' => $this->getPhones($event['DESCRIPTION']),
+                'email' => $this->getEmail($event['DESCRIPTION']),
+                'timestamp' => $event['UNIX_TIMESTAMP'],
+                'date' => Carbon::createFromTimestamp($event['UNIX_TIMESTAMP'])->format('Y/m/d H:i:s')
+            ];
+        } else {
+            $arrayInfo = [
+                'vacant' => true
+            ];
+        }
+        return $this->arrayToJson($arrayInfo);
     }
 }

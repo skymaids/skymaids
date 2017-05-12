@@ -5,7 +5,7 @@
 <script>
     import HeaderModule from './Header.vue'
     import TeamsModule from './Teams.vue'
-    import {MenuPage, Loader} from '../../services/resources'
+    import {Loader} from '../../services/resources'
     import {store} from './Store/store'
 
     export default {
@@ -15,13 +15,18 @@
             }
         },
         ready() {
-
+            this.initConf();
         },
         computed: {
 
         },
         methods: {
-
+            initConf: function() {
+                this.configStore();
+            },
+            configStore: function() {
+                this.$broadcast('load');
+            }
         },
         events: {
 

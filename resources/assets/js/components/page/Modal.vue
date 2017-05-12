@@ -8,7 +8,6 @@
                     </button>
                     <h4 class="modal-title">{{ config.title }}</h4>
                 </div>
-                <slot name="modal-body"></slot>
             </div>
         </div>
     </div>

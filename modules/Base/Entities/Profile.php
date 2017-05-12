@@ -30,7 +30,7 @@ class Profile extends BaseModel
      * Relation with users
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    private function users()
+    protected function users()
     {
         return $this->hasMany(User::class, 'id', 'profile_id');
     }

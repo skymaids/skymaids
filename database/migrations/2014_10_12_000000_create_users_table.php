@@ -26,14 +26,15 @@ class CreateUsersTable extends Migration
             $table->foreign('user_status_id')->references('id')->on('user_status')->onUpdate('cascade');
 
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->boolean('status');
-            $table->boolean('warn');
-            $table->string('cel');
+            $table->boolean('warn')->default(1);
+            $table->string('cel')->nullable();
             $table->string('phone')->nullable();
+            $table->string('taxid')->nullable();
+            $table->string('social')->nullable();
             $table->boolean('gender')->default(1);
             $table->string('image')->nullable();
             $table->text('obs')->nullable();

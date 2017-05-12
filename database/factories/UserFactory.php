@@ -25,11 +25,10 @@ $factory->define(User::class, function () use ($faker)
         'email' => $faker->email,
         'password' => Hash::make('123456'),
         'remember_token' => str_random(10),
-        'status' => $faker->boolean,
+        'user_status_id' => 1,
         'warn' => $faker->boolean,
         'cel' => $faker->phoneNumber,
         'phone' => $faker->phoneNumber,
-        'gender' => 1,
-        'obs' => $faker->sentences
+        'gender' => 1
     ];
 });

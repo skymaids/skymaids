@@ -28,7 +28,7 @@ class Status extends BaseModel
      * Relation with user
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    private function users()
+    protected function users()
     {
         return $this->hasMany(User::class, 'id', 'user_status_id');
     }

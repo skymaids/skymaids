@@ -3,6 +3,8 @@ namespace Modules\Schedule\Entities;
 
 use Modules\Base\Entities\BaseModel;
 use Modules\Team\Entities\Team;
+use Modules\User\Entities\Address;
+use Modules\User\Entities\User;
 
 /**
  * Class Schedule
@@ -21,8 +23,11 @@ class Schedule extends BaseModel
         'user_id',
         'user_address_id',
         'team_id',
+        'schedule_status_id',
         'day',
         'start',
+        'key',
+        'checked',
         'end',
         'obs'
     ];
@@ -37,7 +42,7 @@ class Schedule extends BaseModel
      * Relation with team
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function team()
+    protected function team()
     {
         return $this->belongsTo(Team::class);
     }
@@ -46,7 +51,7 @@ class Schedule extends BaseModel
      * Relation with user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function user()
+    protected function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -55,8 +60,17 @@ class Schedule extends BaseModel
      * Relation with address
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function address()
+    protected function user_address()
     {
         return $this->belongsTo(Address::class);
+    }
+
+    /**
+     * Relation with status
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    protected function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

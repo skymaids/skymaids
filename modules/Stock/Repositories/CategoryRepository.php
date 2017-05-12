@@ -15,8 +15,6 @@ use Modules\Stock\Entities\Category;
  */
 class CategoryRepository extends BaseRepository
 {
-    protected $logSelect;
-
     /**
      * @var array
      */

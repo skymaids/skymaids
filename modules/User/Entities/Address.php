@@ -2,6 +2,7 @@
 namespace Modules\User\Entities;
 
 use Modules\Base\Entities\BaseModel;
+use Modules\Schedule\Entities\Schedule;
 
 /**
  * Class Address
@@ -18,7 +19,7 @@ class Address extends BaseModel
      */
     protected $fillable = [
         'user_id',
-        'user_address_id',
+        'address',
         'city',
         'state',
         'zip',
@@ -35,7 +36,7 @@ class Address extends BaseModel
      * Relation with user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function user()
+    protected function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -44,7 +45,7 @@ class Address extends BaseModel
      * Relation with schedules
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    private function schedules()
+    protected function schedules()
     {
         return $this->hasMany(Schedule::class, 'id', 'user_address_id');
     }

@@ -6,15 +6,24 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class TesteController extends Controller
 {
     public function index()
     {
+
+        Mail::send('modules.base.message.sms', ['title' => 'teste', 'message' => 'teste'], function ($message)
+        {
+            $message->from('skymaids17@gmail.com');
+            $message->to('2403606361@tmomail.net', 'Ruver Dornelas');
+        });
+        exit();
         $team = 'https://calendar.google.com/calendar/ical/skymaids.net_s9i8jkd4a9fi91fs08to63cumk%40group.calendar.google.com/private-e1924741a2816e7d8f818bf145d9ca8f/basic.ics';
 
         $calendar   = new CalendarController($team);
-        $events = $calendar->eventsFromRange('2017/02/20 00:00:00','2017/02/20 23:59:59');
+
+        $events = $calendar->eventsFromRange('2017/02/21 00:00:00','2017/02/21 23:59:59');
 
         foreach ($events as $event){
             if(strtolower($event['SUMMARY']) !== 'vacant') {

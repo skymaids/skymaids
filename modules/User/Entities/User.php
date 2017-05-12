@@ -8,6 +8,7 @@ use Modules\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Modules\Auth\Traits\PasswordResetTrait;
 use Modules\Base\Entities\Company;
 use Modules\Base\Entities\Profile;
+use Modules\Team\Entities\Composition;
 
 /**
  * Class User
@@ -31,10 +32,12 @@ class User extends Authenticatable
         'password',
         'profile_id',
         'company_id',
-        'status',
+        'user_status_id',
         'warn',
         'cell',
         'phone',
+        'taxid',
+        'social',
         'gender',
         'image',
         'obs'
@@ -63,7 +66,7 @@ class User extends Authenticatable
      * Relation with profile
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function profile()
+    protected function profile()
     {
         return $this->belongsTo(Profile::class);
     }
@@ -72,7 +75,7 @@ class User extends Authenticatable
      * Relation with company
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function company()
+    protected function company()
     {
         return $this->belongsTo(Company::class);
     }
@@ -81,8 +84,17 @@ class User extends Authenticatable
      * Relation with status
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function status()
+    protected function status()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * Relation with schedules
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    protected function compositions()
+    {
+        return $this->hasMany(Composition::class, 'id', 'user_id');
     }
 }

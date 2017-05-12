@@ -3,10 +3,30 @@
 namespace Modules\Team\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Modules\Base\Http\Controllers\BaseController;
+use Modules\Team\Repositories\TeamRepository;
 
-class TeamController extends Controller
+/**
+ * Class TeamController
+ * @package Modules\Team\Http\Controllers
+ * @author Ruver Dornelas <ruverd@gmail.com>
+ * @Date 02/21/2017
+ * @version 1.0
+ */
+class TeamController extends BaseController
 {
+    protected $repository,
+              $repositorySchedule;
+
+    /**
+     * CategoryController constructor.
+     * @param CategoryRepository $repository
+     */
+    public function __construct(TeamRepository $repository)
+    {
+        $this->repository  = $repository;
+    }
+
 	/**
      * Display a listing of the resource.
      * @return Response
@@ -58,5 +78,35 @@ class TeamController extends Controller
      */
     public function destroy()
     {
+    }
+
+    /**
+     * Sync calendar team
+     *
+     * @param $id
+     */
+    public function sync($id)
+    {
+        dd($id);
+    }
+
+    /**
+     * Send messages for this calendar team
+     *
+     * @param $id
+     */
+    public function send($id)
+    {
+        dd($id);
+    }
+
+    /**
+     * Send messages for this calendar team
+     *
+     * @param $id
+     */
+    public function report($id)
+    {
+        dd($id);
     }
 }

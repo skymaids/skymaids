@@ -24,9 +24,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 1,
                 'company_id' => 1,
-                'name' => 'Car #01',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #01',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-danger'
             ]
         );
 
@@ -34,9 +34,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 2,
                 'company_id' => 1,
-                'name' => 'Car #02',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #02',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-primary'
             ]
         );
 
@@ -44,9 +44,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 3,
                 'company_id' => 1,
-                'name' => 'Car #03',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #03',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-default'
             ]
         );
 
@@ -54,9 +54,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 4,
                 'company_id' => 1,
-                'name' => 'Car #04',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #04',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-info'
             ]
         );
 
@@ -64,9 +64,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 5,
                 'company_id' => 1,
-                'name' => 'Car #05',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #05',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-warning'
             ]
         );
 
@@ -74,9 +74,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 6,
                 'company_id' => 1,
-                'name' => 'Car #06',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #06',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-dark'
             ]
         );
 
@@ -84,9 +84,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 7,
                 'company_id' => 1,
-                'name' => 'Car #07',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #07',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-success'
             ]
         );
 
@@ -94,29 +94,9 @@ class TeamTableSeeder extends Seeder
             [
                 'id' => 8,
                 'company_id' => 1,
-                'name' => 'Car #08',
-                'calendar' => '',
-                'color' => '#cccccc'
-            ]
-        );
-
-        factory(Team::class)->create(
-            [
-                'id' => 9,
-                'company_id' => 1,
-                'name' => 'Car #09',
-                'calendar' => '',
-                'color' => '#cccccc'
-            ]
-        );
-
-        factory(Team::class)->create(
-            [
-                'id' => 10,
-                'company_id' => 1,
-                'name' => 'Car #10',
-                'calendar' => '',
-                'color' => '#cccccc'
+                'name' => 'Carro #08',
+                'calendar' => 'https://calendar.google.com/calendar/ical/skymaids.net_geotm92dqnkl783udd6g3km9jg%40group.calendar.google.com/private-8694da1d3bb482cd07cd051c3a9e5240/basic.ics',
+                'color' => 'tag-danger'
             ]
         );
     }

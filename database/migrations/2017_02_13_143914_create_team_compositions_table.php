@@ -16,13 +16,15 @@ class CreateTeamCompositionsTable extends Migration
         Schema::create('team_compositions', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('schedule_id')->unsigned();
-            $table->foreign('schedule_id')->references('id')->on('schedules')->onUpdate('cascade');
+            $table->integer('team_id')->unsigned();
+            $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
 
-            $table->unique(['schedule_id','user_id']);
+            $table->date('day');
+
+            $table->unique(['team_id','user_id','day']);
             $table->timestamps();
         });
     }

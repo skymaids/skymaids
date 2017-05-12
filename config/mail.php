@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.sao.terra.com.br'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'imatec2@terra.com.br', 'name' => 'Imatec Gerenciamento Seguro da Informação'],
+    'from' => ['address' => 'skymaids17@gmail.com', 'name' => 'Sky Maids'],
 
     /*
     |--------------------------------------------------------------------------

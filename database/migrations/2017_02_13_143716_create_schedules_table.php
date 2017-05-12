@@ -25,10 +25,15 @@ class CreateSchedulesTable extends Migration
             $table->integer('team_id')->unsigned();
             $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade');
 
+            $table->integer('schedule_status_id')->unsigned()->default(1);
+            $table->foreign('schedule_status_id')->references('id')->on('schedule_status')->onUpdate('cascade');
+
             $table->date('day');
             $table->time('start');
             $table->time('end');
             $table->text('obs')->nullable();
+            $table->boolean('key')->default(0);
+            $table->boolean('checked')->default(1);
             $table->dateTime('message')->nullable();
             $table->dateTime('confirm')->nullable();
             $table->timestamps();

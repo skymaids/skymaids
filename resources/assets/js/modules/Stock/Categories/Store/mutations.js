@@ -9,6 +9,7 @@ export default{
     setId(state,payload) {
         state.crud.id = (payload.id) ? parseInt(payload.id) : null;
     },
+
     changeTitleTabs(state,payload) {
         state.crud.modal.tabs[payload.tab].title = payload.title;
     },

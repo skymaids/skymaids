@@ -35,16 +35,25 @@ class Team extends BaseModel
      * Relation with schedule
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    private function schedules()
+    protected function schedules()
     {
-        return $this->hasMany(Schedule::class, 'id', 'user_status_id');
+        return $this->hasMany(Schedule::class, 'id', 'team_id');
+    }
+
+    /**
+     * Relation with compositions
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    protected function compositions()
+    {
+        return $this->hasMany(Composition::class, 'id', 'team_id');
     }
 
     /**
      * Relation with company
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    private function company()
+    protected function company()
     {
         return $this->belongsTo(Company::class);
     }
